@@ -35,6 +35,7 @@ const transactionReducer = (state: Transaction[], action: Action) => {
         tr.id === action.payload.id
           ? {
               ...tr,
+              id: action.payload.id,
               title: action.payload.title,
               desc: action.payload.desc,
               amount: action.payload.amount,
