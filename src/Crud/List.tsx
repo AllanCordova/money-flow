@@ -9,65 +9,153 @@ type Input = {
 };
 
 const List = () => {
-  const [isEdit, setEdit] = useState<boolean>(false);
-  const [id, setId] = useState<number>(0);
-
-  const { register, handleSubmit, reset } = useForm<Input>();
+  const [id, setId] = useState<number | null>(null); // Permite diferenciar quando não há edição
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<Input>();
 
   const context = useContext(TransactionContext);
-  if (!context) return;
+  if (!context) return null;
 
   const { state, dispatch } = context;
 
   const onSubmit = (data: Input) => {
-    const newTransaction = { ...data, id: id };
-    dispatch({ type: "editar", payload: newTransaction });
+    if (id !== null) {
+      const newTransaction = { ...data, id };
+      dispatch({ type: "editar", payload: newTransaction });
+    }
     reset();
-    setEdit((e) => !e);
-  };
-
-  const edit = (id: number) => {
-    setEdit((e) => !e);
-    setId(id);
+    setId(null); // Reseta o estado de edição
   };
 
   return (
-    <div>
-      <ul>
-        {state.map((tr) => (
-          <li key={tr.id}>
-            <strong>{tr.title}</strong>
-            <span>{tr.desc}</span>
-            <span>{tr.amount}</span>
-            <button onClick={() => edit(tr.id)}>Edit</button>
-            <button
-              onClick={() => dispatch({ type: "remover", payload: tr.id })}
-            >
-              Remover
-            </button>
-          </li>
-        ))}
-      </ul>
-      {isEdit && (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input
-            type="text"
-            placeholder="nome"
-            {...register("title", { required: true })}
-          />
-          <input
-            type="text"
-            placeholder="descrição"
-            {...register("desc", { required: true })}
-          />
-          <input
-            type="text"
-            placeholder="valor"
-            {...register("amount", { required: true })}
-          />
-          <button type="submit">salvar</button>
-        </form>
-      )}
+    <div className="container text-center">
+      <div className="row mt-3">
+        <div className="col-12 col-lg-6 offset-lg-3">
+          <ul className="list-group">
+            {state.map((tr) => (
+              <li
+                className="list-group-item d-flex flex-column gap-2 align-items-start justify-content-center"
+                key={tr.id}
+              >
+                <div className="d-flex align-items-center w-100 gap-2">
+                  <div className="d-flex gap-2 w-100">
+                    <strong className="poppins-regular">
+                      Nome: {tr.title}
+                    </strong>
+                    <span className="poppins-light">Descrição: {tr.desc}</span>
+                  </div>
+                  <button
+                    type="button"
+                    className="btn btn-light"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    onClick={() => setId(tr.id)}
+                  >
+                    <i className="bi bi-pen"></i>
+                  </button>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() =>
+                      dispatch({ type: "remover", payload: tr.id })
+                    }
+                  >
+                    <i className="bi bi-trash"></i>
+                  </button>
+                </div>
+                <span>Valor: {tr.amount}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div
+        className="modal fade"
+        id="exampleModal"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="exampleModalLabel">
+                Editar Transação
+              </h1>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                onClick={() => setId(null)}
+              ></button>
+            </div>
+            <div className="modal-body">
+              <form
+                className="d-flex flex-column align-items-start justify-content-center gap-2"
+                onSubmit={handleSubmit(onSubmit)}
+              >
+                <label htmlFor="title" className="poppins-regular">
+                  Nome
+                </label>
+                <input
+                  className={`form-control ${errors.title ? "is-invalid" : ""}`}
+                  type="text"
+                  placeholder="Presente"
+                  id="title"
+                  {...register("title", { required: true })}
+                />
+                {errors.title && (
+                  <span className="invalid-feedback poppins-regular">
+                    A transação precisa de um nome
+                  </span>
+                )}
+                <label htmlFor="desc" className="poppins-regular">
+                  Descrição
+                </label>
+                <textarea
+                  className={`form-control  ${errors.desc ? "is-invalid" : ""}`}
+                  placeholder="Ganho de 5000, para a viagem"
+                  id="desc"
+                  rows={2}
+                  {...register("desc", { required: true })}
+                />
+                {errors.desc && (
+                  <span className="invalid-feedback poppins-regular">
+                    A transação precisa de uma descrição
+                  </span>
+                )}
+                <label htmlFor="amount" className="poppins-regular">
+                  Valor
+                </label>
+                <input
+                  className={`form-control  ${
+                    errors.amount ? "is-invalid" : ""
+                  }`}
+                  type="number"
+                  placeholder="5000"
+                  id="amount"
+                  {...register("amount", { required: true })}
+                />
+                {errors.amount && (
+                  <span className="invalid-feedback poppins-regular">
+                    A transação precisa de um Valor
+                  </span>
+                )}
+                <button
+                  className="btn btn-success w-100 poppins-light p-2"
+                  type="submit"
+                >
+                  salvar
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
