@@ -35,7 +35,9 @@ const Form = () => {
     <div className="container text-center">
       <div className="row d-flex flex-column gap-2 mt-4">
         <div className="col-12">
-          <h2 className="poppins-medium fs-3">Adicionar Transação</h2>
+          <h2 className="poppins-medium text-success fs-3">
+            Adicionar Transação
+          </h2>
           <i className="bi bi-bank fs-2"></i>
         </div>
         <div className="col-12 col-lg-6 offset-lg-3">

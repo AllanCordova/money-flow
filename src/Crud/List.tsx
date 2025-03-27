@@ -44,7 +44,10 @@ const List = () => {
 
   return (
     <div className="container text-center">
-      <div className="row mt-3">
+      <div className="row gap-2 mt-3">
+        <div className="col-12">
+          <h2 className="poppins-medium fs-3">Transações</h2>
+        </div>
         <div className="col-12 col-lg-6 offset-lg-3">
           <ul className="list-group">
             {state.map((tr) => (
