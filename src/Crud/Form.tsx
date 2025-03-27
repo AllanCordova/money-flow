@@ -5,6 +5,7 @@ import { TransactionContext } from "../Context";
 type Input = {
   title: string;
   desc: string;
+  type: string;
   amount: number;
 };
 
@@ -20,16 +21,22 @@ const Form = () => {
   const onSubmit = (data: Input) => {
     context?.dispatch({
       type: "adicionar",
-      payload: { title: data.title, desc: data.desc, amount: data.amount },
+      payload: {
+        title: data.title,
+        desc: data.desc,
+        type: data.type,
+        amount: data.amount,
+      },
     });
     reset();
   };
 
   return (
     <div className="container text-center">
-      <div className="row d-flex flex-column gap-4 mt-5">
+      <div className="row d-flex flex-column gap-2 mt-4">
         <div className="col-12">
-          <h2 className="poppins-medium">Adicionar Transação</h2>
+          <h2 className="poppins-medium fs-3">Adicionar Transação</h2>
+          <i className="bi bi-bank fs-2"></i>
         </div>
         <div className="col-12 col-lg-6 offset-lg-3">
           <form
@@ -66,6 +73,17 @@ const Form = () => {
                 A transação precisa de uma descrição
               </span>
             )}
+            <label htmlFor="type" className="poppins-regular">
+              Tipo de Transação
+            </label>
+            <select
+              className="form-select"
+              aria-label="Default select example"
+              {...register("type", { required: true })}
+            >
+              <option value="Entrada">Entrada</option>
+              <option value="Saída">Saida</option>
+            </select>
             <label htmlFor="amount" className="poppins-regular">
               Valor
             </label>

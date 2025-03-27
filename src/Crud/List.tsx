@@ -5,6 +5,7 @@ import { TransactionContext } from "../Context";
 type Input = {
   title: string;
   desc: string;
+  type: string;
   amount: number;
 };
 
@@ -51,12 +52,23 @@ const List = () => {
                 className="list-group-item d-flex flex-column gap-2 align-items-start justify-content-center"
                 key={tr.id}
               >
-                <div className="d-flex align-items-center w-100 gap-2">
+                <span
+                  className={`${
+                    tr.type === "Entrada" ? "text-success" : "text-danger"
+                  } poppins-regular`}
+                >
+                  {tr.type}
+                </span>
+                <div className="d-flex align-items-center w-100">
                   <div className="d-flex gap-2 w-100">
-                    <strong className="poppins-regular">
-                      Nome: {tr.title}
-                    </strong>
-                    <span className="poppins-light">Descrição: {tr.desc}</span>
+                    <strong className="poppins-light">Nome: {tr.title}</strong>
+                    <span
+                      className={`${
+                        tr.type === "Entrada" ? "text-success" : "text-danger"
+                      }`}
+                    >
+                      Valor: {tr.amount}
+                    </span>
                   </div>
                   <button
                     type="button"
@@ -76,7 +88,7 @@ const List = () => {
                     <i className="bi bi-trash"></i>
                   </button>
                 </div>
-                <span>Valor: {tr.amount}</span>
+                <span className="poppins-light">Descrição: {tr.desc}</span>
               </li>
             ))}
           </ul>
@@ -137,7 +149,17 @@ const List = () => {
                     A transação precisa de uma descrição
                   </span>
                 )}
-
+                <label htmlFor="type" className="poppins-regular">
+                  Tipo de Transação
+                </label>
+                <select
+                  className="form-select"
+                  aria-label="Default select example"
+                  {...register("type", { required: true })}
+                >
+                  <option value="Entrada">Entrada</option>
+                  <option value="Saída">Saida</option>
+                </select>
                 <label htmlFor="amount" className="poppins-regular">
                   Valor
                 </label>

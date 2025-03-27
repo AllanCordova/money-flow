@@ -2,13 +2,14 @@ type Transaction = {
   id: number;
   title: string;
   desc: string;
+  type: string;
   amount: number;
 };
 
 type Action =
   | {
       type: "adicionar";
-      payload: { title: string; desc: string; amount: number };
+      payload: { title: string; desc: string; type: string; amount: number };
     }
   | { type: "remover"; payload: number }
   | { type: "limpar" }
@@ -23,6 +24,7 @@ const transactionReducer = (state: Transaction[], action: Action) => {
           id: Date.now(),
           title: action.payload.title,
           desc: action.payload.desc,
+          type: action.payload.type,
           amount: action.payload.amount,
         },
       ];
@@ -38,6 +40,7 @@ const transactionReducer = (state: Transaction[], action: Action) => {
               id: action.payload.id,
               title: action.payload.title,
               desc: action.payload.desc,
+              type: action.payload.type,
               amount: action.payload.amount,
             }
           : tr
