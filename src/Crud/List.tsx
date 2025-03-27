@@ -183,6 +183,7 @@ const List = () => {
                 <button
                   className="btn btn-success w-100 poppins-light p-2"
                   type="submit"
+                  data-bs-dismiss="modal"
                 >
                   Salvar
                 </button>
