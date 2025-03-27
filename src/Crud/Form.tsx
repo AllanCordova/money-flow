@@ -27,7 +27,7 @@ const Form = () => {
 
   return (
     <div className="container text-center">
-      <div className="row d-flex flex-column gap-5 mt-5">
+      <div className="row d-flex flex-column gap-4 mt-5">
         <div className="col-12">
           <h2 className="poppins-medium">Adicionar Transação</h2>
         </div>

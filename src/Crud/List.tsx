@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { TransactionContext } from "../Context";
 
@@ -9,7 +9,7 @@ type Input = {
 };
 
 const List = () => {
-  const [id, setId] = useState<number | null>(null); // Permite diferenciar quando não há edição
+  const [id, setId] = useState<number | null>(null);
   const {
     register,
     handleSubmit,
@@ -22,13 +22,23 @@ const List = () => {
 
   const { state, dispatch } = context;
 
+  // Sempre que o id mudar, preencher os inputs com os dados da transação
+  useEffect(() => {
+    if (id !== null) {
+      const transaction = state.find((tr) => tr.id === id);
+      if (transaction) {
+        reset(transaction);
+      }
+    }
+  }, [id, state, reset]);
+
   const onSubmit = (data: Input) => {
     if (id !== null) {
       const newTransaction = { ...data, id };
       dispatch({ type: "editar", payload: newTransaction });
     }
     reset();
-    setId(null); // Reseta o estado de edição
+    setId(null);
   };
 
   return (
@@ -104,7 +114,6 @@ const List = () => {
                 <input
                   className={`form-control ${errors.title ? "is-invalid" : ""}`}
                   type="text"
-                  placeholder="Presente"
                   id="title"
                   {...register("title", { required: true })}
                 />
@@ -113,12 +122,12 @@ const List = () => {
                     A transação precisa de um nome
                   </span>
                 )}
+
                 <label htmlFor="desc" className="poppins-regular">
                   Descrição
                 </label>
                 <textarea
-                  className={`form-control  ${errors.desc ? "is-invalid" : ""}`}
-                  placeholder="Ganho de 5000, para a viagem"
+                  className={`form-control ${errors.desc ? "is-invalid" : ""}`}
                   id="desc"
                   rows={2}
                   {...register("desc", { required: true })}
@@ -128,15 +137,15 @@ const List = () => {
                     A transação precisa de uma descrição
                   </span>
                 )}
+
                 <label htmlFor="amount" className="poppins-regular">
                   Valor
                 </label>
                 <input
-                  className={`form-control  ${
+                  className={`form-control ${
                     errors.amount ? "is-invalid" : ""
                   }`}
                   type="number"
-                  placeholder="5000"
                   id="amount"
                   {...register("amount", { required: true })}
                 />
@@ -145,11 +154,12 @@ const List = () => {
                     A transação precisa de um Valor
                   </span>
                 )}
+
                 <button
                   className="btn btn-success w-100 poppins-light p-2"
                   type="submit"
                 >
-                  salvar
+                  Salvar
                 </button>
               </form>
             </div>
