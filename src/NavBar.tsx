@@ -19,13 +19,13 @@ const NavBar = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link fw-semibold" href="#">
-              About
-            </a>
+            <Link className="nav-link fw-semibold" to="/Register">
+              Login
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link text-muted" aria-disabled="true">
-              Login
+            <a className="nav-link" aria-disabled="true">
+              About
             </a>
           </li>
         </ul>

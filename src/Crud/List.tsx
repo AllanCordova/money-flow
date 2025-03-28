@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { TransactionContext } from "../Context";
+import { useNavigate } from "react-router-dom";
 
 type Input = {
   title: string;
@@ -44,11 +45,21 @@ const List = () => {
     setId(null);
   };
 
+  const navigate = useNavigate();
+
   return (
     <div className="container text-center">
-      <div className="row gap-2 mt-3">
-        <div className="col-12">
-          <h2 className="poppins-medium text-white fs-3">Transações</h2>
+      <div className="row gap-5 mt-5">
+        <div className="col-12 col-lg-6 offset-lg-3">
+          <div className="d-flex align-items-center justify-content-between">
+            <button className="btn btn-secondary" onClick={() => navigate("/")}>
+              <i className="bi bi-arrow-left"></i>
+            </button>
+            <h2 className="poppins-medium text-white fs-3 m-0">Transações</h2>
+            <button className="btn btn-secondary" onClick={() => navigate("/")}>
+              <i className="bi bi-arrow-right"></i>
+            </button>
+          </div>
         </div>
         <div className="col-12 col-lg-6 offset-lg-3">
           <ul className="list-group">
@@ -72,7 +83,7 @@ const List = () => {
                     <span
                       className={`${
                         tr.type === "Entrada" ? "text-success" : "text-danger"
-                      } text-white`}
+                      } text-white poppins-light`}
                     >
                       Valor: {tr.amount}
                     </span>
@@ -103,7 +114,7 @@ const List = () => {
           </ul>
         </div>
       </div>
-
+      {/* Modal de Edção */}
       <div
         className="modal fade"
         id="exampleModal"

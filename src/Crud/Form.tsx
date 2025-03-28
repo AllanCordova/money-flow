@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { TransactionContext } from "../Context";
+import { useNavigate } from "react-router-dom";
 
 type Input = {
   title: string;
@@ -31,15 +32,31 @@ const Form = () => {
     reset();
   };
 
+  const navigate = useNavigate();
+
   return (
     <div className="container text-center">
-      <div className="row d-flex flex-column gap-2 mt-4">
-        <div className="col-12">
-          <h2 className="poppins-medium text-white fs-3">
-            Adicionar Transação
-          </h2>
-        </div>
+      <div className="row d-flex flex-column gap-2 mt-5">
         <div className="col-12 col-lg-6 offset-lg-3">
+          <div className="d-flex align-items-center justify-content-between">
+            <button
+              className="btn btn-secondary"
+              onClick={() => navigate("/List")}
+            >
+              <i className="bi bi-arrow-left"></i>
+            </button>
+            <h2 className="poppins-medium text-white fs-3 m-0">
+              Adicionar Transação
+            </h2>
+            <button
+              className="btn btn-secondary"
+              onClick={() => navigate("/List")}
+            >
+              <i className="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+        <div className="col-12 col-lg-6 offset-lg-3 mt-2">
           <form
             className="d-flex flex-column align-items-start justify-content-center gap-2"
             onSubmit={handleSubmit(onSubmit)}

@@ -17,9 +17,16 @@ type Action =
   | { type: "limpar" }
   | { type: "editar"; payload: Transaction };
 
+type Login = {
+  email: string;
+  password: string;
+};
+
 interface ContextType {
   state: Transaction[];
   dispatch: React.Dispatch<Action>;
+  users: Login[];
+  setUser: React.Dispatch<React.SetStateAction<Login[]>>;
 }
 
 export const TransactionContext = createContext<ContextType | null>(null);
