@@ -122,29 +122,34 @@ const List = () => {
         aria-hidden="true"
       >
         <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">
+          <div className="modal-content bg-dark">
+            <div className="modal-header d-flex justify-content-between">
+              <h1
+                className="modal-title text-white fs-5"
+                id="exampleModalLabel"
+              >
                 Editar Transação
               </h1>
               <button
                 type="button"
-                className="btn-close"
+                className="btn btn-dark"
                 data-bs-dismiss="modal"
                 aria-label="Close"
                 onClick={() => setId(null)}
-              ></button>
+              >
+                <i className="bi bi-x-circle fs-5"></i>
+              </button>
             </div>
             <div className="modal-body">
               <form
                 className="d-flex flex-column align-items-start justify-content-center gap-2"
                 onSubmit={handleSubmit(onSubmit)}
               >
-                <label htmlFor="title" className="poppins-regular">
+                <label htmlFor="title" className="poppins-regular text-white">
                   Nome
                 </label>
                 <input
-                  className={`form-control ${errors.title ? "is-invalid" : ""}`}
+                  className={`input ${errors.title ? "is-invalid" : ""}`}
                   type="text"
                   id="title"
                   {...register("title", { required: true })}
@@ -155,11 +160,11 @@ const List = () => {
                   </span>
                 )}
 
-                <label htmlFor="desc" className="poppins-regular">
+                <label htmlFor="desc" className="poppins-regular text-white">
                   Descrição
                 </label>
                 <textarea
-                  className={`form-control ${errors.desc ? "is-invalid" : ""}`}
+                  className={`input ${errors.desc ? "is-invalid" : ""}`}
                   id="desc"
                   rows={2}
                   {...register("desc", { required: true })}
@@ -169,24 +174,23 @@ const List = () => {
                     A transação precisa de uma descrição
                   </span>
                 )}
-                <label htmlFor="type" className="poppins-regular">
+                <label htmlFor="type" className="poppins-regular text-white">
                   Tipo de Transação
                 </label>
                 <select
-                  className="form-select"
+                  className="input"
                   aria-label="Default select example"
+                  id="type"
                   {...register("type", { required: true })}
                 >
                   <option value="Entrada">Entrada</option>
                   <option value="Saída">Saida</option>
                 </select>
-                <label htmlFor="amount" className="poppins-regular">
+                <label htmlFor="amount" className="poppins-regular text-white">
                   Valor
                 </label>
                 <input
-                  className={`form-control ${
-                    errors.amount ? "is-invalid" : ""
-                  }`}
+                  className={`input ${errors.amount ? "is-invalid" : ""}`}
                   type="number"
                   id="amount"
                   {...register("amount", { required: true })}
@@ -198,7 +202,7 @@ const List = () => {
                 )}
 
                 <button
-                  className="btn btn-success w-100 poppins-light p-2"
+                  className="btn btn-secondary w-100 poppins-light p-2"
                   type="submit"
                   data-bs-dismiss="modal"
                 >
