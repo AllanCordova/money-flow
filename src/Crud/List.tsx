@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { TransactionContext } from "../Context";
 
@@ -19,11 +19,13 @@ const List = () => {
   } = useForm<Input>();
 
   const context = useContext(TransactionContext);
-  if (!context) return null;
 
-  const { state, dispatch } = context;
+  const state = useMemo(() => context?.state ?? [], [context?.state]);
+  const dispatch = useMemo(
+    () => context?.dispatch ?? (() => {}),
+    [context?.dispatch]
+  );
 
-  // Sempre que o id mudar, preencher os inputs com os dados da transação
   useEffect(() => {
     if (id !== null) {
       const transaction = state.find((tr) => tr.id === id);
@@ -46,13 +48,13 @@ const List = () => {
     <div className="container text-center">
       <div className="row gap-2 mt-3">
         <div className="col-12">
-          <h2 className="poppins-medium fs-3">Transações</h2>
+          <h2 className="poppins-medium text-white fs-3">Transações</h2>
         </div>
         <div className="col-12 col-lg-6 offset-lg-3">
           <ul className="list-group">
             {state.map((tr) => (
               <li
-                className="list-group-item d-flex flex-column gap-2 align-items-start justify-content-center"
+                className="list d-flex flex-column gap-2 align-items-start justify-content-center"
                 key={tr.id}
               >
                 <span
@@ -62,13 +64,15 @@ const List = () => {
                 >
                   {tr.type}
                 </span>
-                <div className="d-flex align-items-center w-100">
-                  <div className="d-flex gap-2 w-100">
-                    <strong className="poppins-light">Nome: {tr.title}</strong>
+                <div className="d-flex align-items-center gap-2 w-100">
+                  <div className="d-flex align-items-center gap-2 w-100">
+                    <strong className="poppins-light text-white">
+                      Nome: {tr.title}
+                    </strong>
                     <span
                       className={`${
                         tr.type === "Entrada" ? "text-success" : "text-danger"
-                      }`}
+                      } text-white`}
                     >
                       Valor: {tr.amount}
                     </span>
@@ -91,7 +95,9 @@ const List = () => {
                     <i className="bi bi-trash"></i>
                   </button>
                 </div>
-                <span className="poppins-light">Descrição: {tr.desc}</span>
+                <span className="poppins-light text-white">
+                  Descrição: {tr.desc}
+                </span>
               </li>
             ))}
           </ul>

@@ -16,7 +16,55 @@
   font-style: normal;
 }
 
+:root {
+  --bg-color: #121212;
+  --container-color: #1e1e1e;
+  --text-color: #e0e0e0;
+  --link-color: #bb86fc;
+  --link-hover-color: #9a6ddf;
+  --button-color: #03dac6;
+  --button-hover-color: #00c4b4;
+  --input-bg: #292929;
+  --input-border: #a0a0a0;
+  --placeholder-color: #a0a0a0;
+  --alert-color: #cf6679;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+nav {
+  background-color: var(--container-color);
+  padding: 1rem;
+}
+
+.nav-link {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
 .nav-link:hover {
-  color: #0d6efd !important; /* Azul do Bootstrap */
+  color: var(--link-hover-color);
   text-decoration: underline;
+}
+
+.input {
+  background-color: var(--input-bg);
+  width: 100%;
+  color: var(--text-color);
+  border: 1px solid var(--input-border);
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.input::placeholder {
+  color: var(--placeholder-color);
+}
+
+.list {
+  background-color: var(--container-color);
+  border: solid var(--input-border) 1px;
+  padding: 10px;
 }

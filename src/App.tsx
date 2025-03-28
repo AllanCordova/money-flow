@@ -10,15 +10,17 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 const App = () => {
   return (
-    <BrowserRouter basename="/money-flow">
-      <TransactionProvider>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Form />} />
-          <Route path="/list" element={<List />} />
-        </Routes>
-      </TransactionProvider>
-    </BrowserRouter>
+    <div>
+      <BrowserRouter basename="/money-flow">
+        <TransactionProvider>
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<Form />} />
+            <Route path="/list" element={<List />} />
+          </Routes>
+        </TransactionProvider>
+      </BrowserRouter>
+    </div>
   );
 };
 
