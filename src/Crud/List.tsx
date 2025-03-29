@@ -56,7 +56,10 @@ const List = () => {
               <i className="bi bi-arrow-left"></i>
             </button>
             <h2 className="poppins-medium text-white fs-3 m-0">Transações</h2>
-            <button className="btn btn-secondary" onClick={() => navigate("/")}>
+            <button
+              className="btn btn-secondary"
+              onClick={() => navigate("/Filter")}
+            >
               <i className="bi bi-arrow-right"></i>
             </button>
           </div>

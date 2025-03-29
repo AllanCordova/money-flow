@@ -41,7 +41,7 @@ const Form = () => {
           <div className="d-flex align-items-center justify-content-between">
             <button
               className="btn btn-secondary"
-              onClick={() => navigate("/List")}
+              onClick={() => navigate("/Register")}
             >
               <i className="bi bi-arrow-left"></i>
             </button>

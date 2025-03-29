@@ -3,6 +3,7 @@ import TransactionProvider from "./Provider";
 import Form from "./Crud/Form";
 import List from "./Crud/List";
 import Register from "./Login/Register";
+import FilterList from "./Filter/FilterList";
 import NavBar from "./NavBar";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -19,6 +20,7 @@ const App = () => {
             <Route path="/" element={<Form />} />
             <Route path="/list" element={<List />} />
             <Route path="/Register" element={<Register />} />
+            <Route path="/Filter" element={<FilterList />} />
           </Routes>
         </TransactionProvider>
       </BrowserRouter>

@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
 import { TransactionContext } from "../Context";
 import { FaGoogle, FaFacebook, FaTwitter, FaGithub } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 type Input = {
   email: string;
@@ -17,6 +18,8 @@ const Register = () => {
   } = useForm<Input>();
 
   const [isSuccess, setSuccess] = useState<boolean | null>(null);
+
+  const navigate = useNavigate();
 
   const context = useContext(TransactionContext);
   if (!context) return null;
@@ -37,9 +40,20 @@ const Register = () => {
 
   return (
     <div className="container text-center">
-      <div className="row mt-5">
-        <div className="col-12">
-          <h2 className="text-white poppins-medium fs-3">Criar Conta</h2>
+      <div className="row gap-4 mt-5">
+        <div className="col-12 col-lg-6 offset-lg-3">
+          <div className="d-flex align-items-center justify-content-between">
+            <button
+              className="btn btn-secondary"
+              onClick={() => navigate("/Filter")}
+            >
+              <i className="bi bi-arrow-left"></i>
+            </button>
+            <h2 className="poppins-medium text-white fs-3 m-0">Criar Conta</h2>
+            <button className="btn btn-secondary" onClick={() => navigate("/")}>
+              <i className="bi bi-arrow-right"></i>
+            </button>
+          </div>
         </div>
         <div className="col-12 col-lg-6 offset-lg-3">
           <form

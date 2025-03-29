@@ -9,7 +9,7 @@ const TransactionProvider = ({ children }: { children: React.ReactNode }) => {
       title: "Compras",
       desc: "Lanches e Refeições de sexta",
       amount: 3450,
-      type: "Saida",
+      type: "Saída",
     },
   ]);
   const [users, setUser] = useState([{ email: "", password: "" }]);

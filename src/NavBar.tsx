@@ -21,14 +21,14 @@ const NavBar = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link fw-semibold" to="/Register">
-                  Login
+                <Link className="nav-link fw-semibold" to="/Filter">
+                  Filtrar
                 </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" aria-disabled="true">
-                  About
-                </a>
+                <Link className="nav-link fw-semibold" to="/Register">
+                  Login
+                </Link>
               </li>
             </ul>
           </div>
@@ -63,6 +63,11 @@ const NavBar = () => {
                 <li className="nav-item">
                   <Link className="nav-link fw-semibold" to="/List">
                     Lançamentos
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link fw-semibold" to="/Filter">
+                    Filtrar
                   </Link>
                 </li>
                 <li className="nav-item">
