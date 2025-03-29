@@ -35,57 +35,42 @@ const NavBar = () => {
         </nav>
       </div>
       <div className="d-block d-sm-none">
-        <nav className="navbar navbar-dark bg-dark">
-          <div className="container-fluid">
-            <h2 className="text-success m-0 fs-3 poppins-medium">Money Flow</h2>
+        <nav className="d-lg-none d-md-flex navbar navbar-expand-lg bg-dark">
+          <div className="container-fluid d-flex align-items-center justify-content-between">
+            <div className="nav-title">
+              <h1 className="poppins-medium text-success fs-3 mb-0">
+                Money Flow
+              </h1>
+            </div>
             <button
               className="navbar-toggler"
               type="button"
-              data-bs-toggle="offcanvas"
-              data-bs-target="#offcanvasDarkNavbar"
-              aria-controls="offcanvasDarkNavbar"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <span className="navbar-toggler-icon"></span>
+              <i className="bi bi-list text-white"></i>
             </button>
-            <div
-              className="offcanvas offcanvas-end text-bg-dark"
-              id="offcanvasDarkNavbar"
-              aria-labelledby="offcanvasDarkNavbarLabel"
-            >
-              <div className="offcanvas-header ">
-                <h5
-                  className="offcanvas-title text-success"
-                  id="offcanvasDarkNavbarLabel"
-                >
-                  Money Flow
-                </h5>
-                <button
-                  type="button"
-                  className="btn-close btn-close-white"
-                  data-bs-dismiss="offcanvas"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div className="offcanvas-body">
-                <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
-                  <li className="nav-item">
-                    <Link className="nav-link fw-semibold" to="/">
-                      Home
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link fw-semibold" to="/List">
-                      Lançamentos
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link fw-semibold" to="/Register">
-                      Login
-                    </Link>
-                  </li>
-                </ul>
-              </div>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <Link className="nav-link fw-semibold" to="/">
+                    Home
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link fw-semibold" to="/List">
+                    Lançamentos
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link fw-semibold" to="/Register">
+                    Login
+                  </Link>
+                </li>
+              </ul>
             </div>
           </div>
         </nav>
