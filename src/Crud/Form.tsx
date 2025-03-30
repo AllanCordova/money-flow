@@ -119,7 +119,7 @@ const Form = () => {
               </span>
             )}
             <button
-              className="btn btn-secondary w-100 poppins-regular p-2"
+              className="btn btn-success w-100 poppins-regular p-2"
               type="submit"
             >
               salvar

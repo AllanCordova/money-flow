@@ -7,13 +7,13 @@ import { useNavigate } from "react-router-dom";
 type Input = {
   email: string;
   password: string;
+  name: string;
 };
 
 const Register = () => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<Input>();
 
@@ -28,13 +28,8 @@ const Register = () => {
 
   const onSubmit = (data: Input) => {
     if (data) {
-      setUser((prevUsers) => [...prevUsers, data]);
+      setUser((prevUsers) => [...prevUsers, { ...data, log: false }]);
       setSuccess(true);
-
-      setTimeout(() => {
-        setSuccess(false);
-      }, 3000);
-      reset();
     }
   };
 
@@ -60,6 +55,21 @@ const Register = () => {
             className="d-flex flex-column align-items-start gap-2"
             onSubmit={handleSubmit(onSubmit)}
           >
+            <label className="text-white poppins-regular" htmlFor="name">
+              Nome:
+            </label>
+            <input
+              className="input"
+              placeholder="user123@ex"
+              id="name"
+              type="text"
+              {...register("name", { required: true })}
+            />
+            {errors.email && (
+              <span className="text-danger poppins-regular">
+                Digite um e-mail
+              </span>
+            )}
             <label className="text-white poppins-regular" htmlFor="email">
               Email:
             </label>
@@ -92,16 +102,22 @@ const Register = () => {
             )}
             <button
               type="submit"
-              className="btn btn-secondary w-100 poppins-regular"
+              className="btn btn-success w-100 poppins-regular"
             >
               Cadastrar
             </button>
             {isSuccess && (
               <span
-                className={`alert alert-secondary alert-dismissible fade show w-100`}
+                className={`alert alert-secondary alert-dismissible poppins-medium fade show w-100 d-flex align-items-center gap-2`}
                 role="alert"
               >
                 Parabéns, conta criada com sucesso!
+                <button
+                  className="btn btn-success"
+                  onClick={() => navigate("/Login")}
+                >
+                  Acesse sua conta aqui
+                </button>
               </span>
             )}
           </form>

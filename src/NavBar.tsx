@@ -1,6 +1,18 @@
 import { Link } from "react-router-dom";
+import { useContext, useEffect, useState, useMemo } from "react";
+import { TransactionContext } from "./Context";
 
 const NavBar = () => {
+  const [loggedUser, setLoggedUser] = useState<string | null>(null);
+  const context = useContext(TransactionContext);
+
+  const users = useMemo(() => context?.users ?? [], [context?.users]);
+
+  useEffect(() => {
+    const user = users.find((user) => user.log === true);
+    setLoggedUser(user ? user.name : null);
+  }, [users]);
+
   return (
     <div>
       <div className="d-none d-lg-block">
@@ -26,9 +38,16 @@ const NavBar = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link fw-semibold" to="/Register">
-                  Login
-                </Link>
+                {loggedUser ? (
+                  <span className="fw-semibold text-white d-flex gap-2 mt-2">
+                    <i className="bi bi-person-fill"></i>
+                    {loggedUser}
+                  </span>
+                ) : (
+                  <Link className="nav-link fw-semibold" to="/Register">
+                    Registrar
+                  </Link>
+                )}
               </li>
             </ul>
           </div>
@@ -71,9 +90,16 @@ const NavBar = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link fw-semibold" to="/Register">
-                    Login
-                  </Link>
+                  {loggedUser ? (
+                    <span className="fw-semibold text-white d-flex gap-2 mt-2">
+                      <i className="bi bi-person-fill"></i>
+                      {loggedUser}
+                    </span>
+                  ) : (
+                    <Link className="nav-link fw-semibold" to="/Register">
+                      Registrar
+                    </Link>
+                  )}
                 </li>
               </ul>
             </div>

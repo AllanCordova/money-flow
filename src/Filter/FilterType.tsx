@@ -69,7 +69,7 @@ const FilterType = () => {
               <option value="Entrada">Entrada</option>
               <option value="Saída">Saída</option>
             </select>
-            <button className="btn btn-secondary w-100" type="submit">
+            <button className="btn btn-success w-100" type="submit">
               Buscar
             </button>
             {errors.type && (

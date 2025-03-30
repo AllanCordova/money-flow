@@ -17,10 +17,7 @@ const FilterList = () => {
             <h2 className="poppins-medium text-white fs-3 m-0">
               Transações Filtradas
             </h2>
-            <button
-              className="btn btn-secondary"
-              onClick={() => navigate("/Register")}
-            >
+            <button className="btn btn-secondary" onClick={() => navigate("/")}>
               <i className="bi bi-arrow-right"></i>
             </button>
           </div>

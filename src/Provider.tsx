@@ -12,7 +12,9 @@ const TransactionProvider = ({ children }: { children: React.ReactNode }) => {
       type: "Saída",
     },
   ]);
-  const [users, setUser] = useState([{ email: "", password: "" }]);
+  const [users, setUser] = useState([
+    { email: "", password: "", name: "", log: false },
+  ]);
 
   return (
     <TransactionContext.Provider value={{ state, dispatch, users, setUser }}>

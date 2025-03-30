@@ -20,6 +20,8 @@ type Action =
 type Login = {
   email: string;
   password: string;
+  name: string;
+  log: boolean;
 };
 
 interface ContextType {
